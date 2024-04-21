@@ -1,0 +1,10 @@
+# Use the official Logstash image as the base image
+FROM opensearchproject/logstash-oss-with-opensearch-output-plugin:latest
+
+# Copy the custom Logstash configuration file into the container's pipeline directory
+COPY logstash.conf /usr/share/logstash/pipeline/logstash.conf.tmp
+
+# Overwrite the existing file with the temporary file
+RUN cp -f /usr/share/logstash/pipeline/logstash.conf.tmp /usr/share/logstash/pipeline/logstash.conf
+
+COPY server.pem /usr/share/logstash/config/

@@ -1,0 +1,4 @@
+httpx==0.21.0
+fluent-logger==0.10.0
+fastapi==0.95.*
+uvicorn[standard]==0.21.*

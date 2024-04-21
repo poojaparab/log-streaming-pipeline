@@ -1,0 +1,178 @@
+version: '3.8'
+
+services:
+  # Fluentd 
+  fluentd:
+    hostname: fluentd
+    build:
+      context: ./fluentd
+      dockerfile: Dockerfile-fluentd
+    volumes:
+      - fluentd_conf:/fluentd/etc
+    ports:
+      - "24224:24224"
+    depends_on:
+      - kafka-node1
+    networks:
+      - my_network
+
+  # Web-application
+  web_app:
+    container_name: data-streaming-app
+    hostname: data_streaming_app
+    build:
+      context: ./web_app
+      dockerfile: Dockerfile-webapp
+    ports:
+      - "8000:8000"
+    depends_on:
+      - fluentd
+    volumes:
+      - web_app_logs:/app/logs
+    networks:
+      - my_network
+
+  # Zookeeper
+  zookeeper-node1:
+    image: zookeeper:3.4.9
+    hostname: zookeeper-node1
+    container_name: zookeeper-node1
+    ports:
+      - "2181:2181"
+    restart: unless-stopped
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_PORT: 2181
+    networks:
+      - my_network
+
+  kafka-node1:
+    image: confluentinc/cp-kafka:5.1.0
+    hostname: kafka-node1
+    container_name: kafka-node1
+    ports:
+      - "9092:9092"
+    restart: unless-stopped
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-node1:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_ADVERTISED_HOST_NAME: kafka-node1
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper-node1:2181"
+      KAFKA_CREATE_TOPICS: "nginx-logs:1:1"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    depends_on:
+      - zookeeper-node1
+    networks:
+      - my_network
+
+  # Logstash
+  logstash:
+    image: opensearchproject/logstash-oss-with-opensearch-output-plugin:latest
+    container_name: logstash
+    depends_on:
+      - kafka-node1
+    networks:
+      - my_network
+    volumes:
+      - ./logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      - ./logstash/server.pem:/usr/share/logstash/config/server.pem
+
+  # OpenSearch
+  opensearch-node1:
+    image: opensearchproject/opensearch:2.9.0
+    container_name: opensearch-node1
+    hostname: opensearch-node1
+    environment:
+      - cluster.name=opensearch-cluster
+      - node.name=opensearch-node1
+      - discovery.seed_hosts=opensearch-node1
+      - cluster.initial_cluster_manager_nodes=opensearch-node1
+      - "DISABLE_SECURITY_PLUGIN=true"
+      - "DISABLE_INSTALL_DEMO_CONFIG=true"
+      - bootstrap.memory_lock=true
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - opensearch-node1-data:/usr/share/opensearch/data
+      - opensearch_node1_logs:/usr/share/opensearch/logs
+    ports:
+      - "9200:9200"
+      - "9600:9600"
+    networks:
+      - my_network
+
+  opensearch-dashboards:
+    image: opensearchproject/opensearch-dashboards:2.9.0
+    container_name: opensearch-dashboards
+    ports:
+      - "5601:5601"
+    expose:
+      - "5601"
+    environment:
+      - 'OPENSEARCH_HOSTS=["http://opensearch-node1:9200"]'
+      - "DISABLE_SECURITY_DASHBOARDS_PLUGIN=true"
+    networks:
+      - my_network
+
+  loki:
+    image: grafana/loki:main-6d307e5
+    hostname: loki
+    ports:
+      - "3100:3100"
+    networks:
+      - my_network
+
+  promtail:
+    image: grafana/promtail:main-6d307e5
+    volumes:
+      - /var/log:/var/log
+      - /var/lib/docker/containers:/var/lib/docker/containers
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./promtail/promtail.yaml:/etc/promtail/config.yml
+    networks:
+      - my_network
+    depends_on:
+      - loki
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    networks:
+      - my_network
+    depends_on:
+      - loki
+
+networks:
+  my_network:
+    driver: bridge
+
+volumes:
+  opensearch-node1-data:
+    driver: local
+    name: opensearch-node1-data
+  web_app_logs:
+    driver: local
+    name: web_app_logs
+  fluentd_conf:
+    driver: local
+    name: fluentd_conf
+  logstash_conf:
+    driver: local
+    name: logstash_conf
+  logstash_logs:
+    driver: local
+    name: logstash_logs
+  opensearch_node1_logs:
+    driver: local
+    name: opensearch_node1_logs
+

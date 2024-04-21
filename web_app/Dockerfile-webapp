@@ -1,0 +1,21 @@
+FROM python:3.9-slim
+
+WORKDIR /app
+
+COPY requirements.txt requirements.txt
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+RUN pip install uvicorn
+
+COPY main.py .
+
+EXPOSE 8000
+
+RUN mkdir -p /etc/docker
+
+RUN echo '{"log-driver":"fluentd","log-opts":{"fluentd-address":"fluentd:24224"}}' > /etc/docker/daemon.json
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+
