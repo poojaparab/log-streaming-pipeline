@@ -1,3 +1,2 @@
 #!/bin/bash
-
-docker-compose ps
+echo "Grafana Dashbaord : http://localhost:3000"

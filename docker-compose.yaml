@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  # Fluentd 
+  # Fluentd service for log collection
   fluentd:
     hostname: fluentd
     build:
@@ -16,7 +16,7 @@ services:
     networks:
       - my_network
 
-  # Web-application
+  # Web application service
   web_app:
     container_name: data-streaming-app
     hostname: data_streaming_app
@@ -32,7 +32,7 @@ services:
     networks:
       - my_network
 
-  # Zookeeper
+  # Zookeeper service for Kafka
   zookeeper-node1:
     image: zookeeper:3.4.9
     hostname: zookeeper-node1
@@ -46,6 +46,7 @@ services:
     networks:
       - my_network
 
+  # Kafka service
   kafka-node1:
     image: confluentinc/cp-kafka:5.1.0
     hostname: kafka-node1
@@ -66,7 +67,7 @@ services:
     networks:
       - my_network
 
-  # Logstash
+  # Logstash service for log processing
   logstash:
     image: opensearchproject/logstash-oss-with-opensearch-output-plugin:latest
     container_name: logstash
@@ -76,9 +77,8 @@ services:
       - my_network
     volumes:
       - ./logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
-      - ./logstash/server.pem:/usr/share/logstash/config/server.pem
 
-  # OpenSearch
+  # OpenSearch service
   opensearch-node1:
     image: opensearchproject/opensearch:2.9.0
     container_name: opensearch-node1
@@ -108,6 +108,7 @@ services:
     networks:
       - my_network
 
+  # OpenSearch Dashboards service
   opensearch-dashboards:
     image: opensearchproject/opensearch-dashboards:2.9.0
     container_name: opensearch-dashboards
@@ -121,6 +122,7 @@ services:
     networks:
       - my_network
 
+  # Loki service for log aggregation
   loki:
     image: grafana/loki:main-6d307e5
     hostname: loki
@@ -129,6 +131,7 @@ services:
     networks:
       - my_network
 
+  # Promtail service for log shipping
   promtail:
     image: grafana/promtail:main-6d307e5
     volumes:
@@ -141,6 +144,7 @@ services:
     depends_on:
       - loki
 
+  # Grafana service for visualization
   grafana:
     image: grafana/grafana:latest
     ports:
@@ -166,13 +170,6 @@ volumes:
   fluentd_conf:
     driver: local
     name: fluentd_conf
-  logstash_conf:
-    driver: local
-    name: logstash_conf
-  logstash_logs:
-    driver: local
-    name: logstash_logs
   opensearch_node1_logs:
     driver: local
     name: opensearch_node1_logs
-
