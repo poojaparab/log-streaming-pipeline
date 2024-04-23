@@ -27,7 +27,7 @@ Before using the log streaming pipeline, ensure you have the following installed
 
 
 ## Helper Scripts Explained
-Start the data pipeline.
+
 ### a. Start the data pipeline.
 
     ```bash
@@ -62,7 +62,7 @@ Displays the Grafana dashboard link (`http://localhost:3000`) for monitoring the
 
 You can see the dashboard something like this:
 
-![Image Alt Text](https://github.com/poojaparab/log-streaming-pipeline/blob/main/images/docker-status.png)
+![Image Alt Text](https://github.com/poojaparab/log-streaming-pipeline/blob/main/images/grafana.jpg)
 
 ### e. Give the status of all of the components of the data pipeline.
 
