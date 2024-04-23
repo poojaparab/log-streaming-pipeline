@@ -11,7 +11,7 @@ Before using the log streaming pipeline, ensure you have the following installed
 - Python
 
 ## Architecture
-![Image Alt Text](images\Architecture_diagram.png)
+![Image Alt Text](https://github.com/poojaparab/log-streaming-pipeline/blob/main/images/Architecture_diagram.png)
 
 ## Getting Started
 
@@ -27,8 +27,8 @@ Before using the log streaming pipeline, ensure you have the following installed
 
 
 ## Helper Scripts Explained
-
-### 1. start-pipeline.sh
+Start the data pipeline.
+### a. Start the data pipeline.
 
     ```bash
     ./start-pipeline.sh
@@ -36,7 +36,7 @@ Before using the log streaming pipeline, ensure you have the following installed
 
 Starts the log streaming pipeline by executing `docker-compose up -d`.
 
-### 2. stop-pipeline.sh
+### b. Stop the data pipeline.
 
     ```bash
     ./stop-pipeline.sh
@@ -44,7 +44,7 @@ Starts the log streaming pipeline by executing `docker-compose up -d`.
 
 Stops the log streaming pipeline by executing `docker-compose down`.
 
-### 3. produce-events.sh
+### c. Produce the events to the data pipeline.
 
     ```bash
     ./produce-events.sh
@@ -52,9 +52,9 @@ Stops the log streaming pipeline by executing `docker-compose down`.
 
 Produces events to the pipeline by sending requests to the FastAPI web application hosted on `http://localhost:8000`.
 
-### 4. monitor-pipeline.sh
+### d. Monitor the data pipeline.
 
-    ```bash
+    ```
     ./monitor-pipeline.sh
     ```
 
@@ -62,15 +62,15 @@ Displays the Grafana dashboard link (`http://localhost:3000`) for monitoring the
 
 You can see the dashboard something like this:
 
-![Image Alt Text](images\grafana.jpg)
+![Image Alt Text](https://github.com/poojaparab/log-streaming-pipeline/blob/main/images/docker-status.png)
 
-### 5. get-pipeline-status.sh
+### e. Give the status of all of the components of the data pipeline.
 
 Gives the status of all pipeline containers by executing a Python script (`docker_status_app/app.py`).
 This application is running on: http://127.0.0.1:8111
 
 status will  look like:
-![Image Alt Text](images\docker-status.png)
+![Image Alt Text](https://github.com/poojaparab/log-streaming-pipeline/blob/main/images/docker-status.png)
 
 
 ## Contributors
