@@ -1,4 +1,4 @@
-# Log Streaming Pipeline Documentation
+# Log Streaming Pipeline 
 
 This repository contains a Docker Compose file and helper scripts to set up and manage a log streaming pipeline. The pipeline includes various services such as Fastapi Web-app, Fluentd, Kafka, Logstash, OpenSearch, Grafana, and others, aimed at collecting, processing, storing, and visualizing logs.
 
