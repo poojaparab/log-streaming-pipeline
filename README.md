@@ -30,33 +30,25 @@ Before using the log streaming pipeline, ensure you have the following installed
 
 ### a. Start the data pipeline.
 
-    ```
     ./start-pipeline.sh
-    ```
 
 Starts the log streaming pipeline by executing `docker-compose up -d`.
 
 ### b. Stop the data pipeline.
 
-    ```
     ./stop-pipeline.sh
-    ```
 
 Stops the log streaming pipeline by executing `docker-compose down`.
 
 ### c. Produce the events to the data pipeline.
 
-    ```
     ./produce-events.sh
-    ```
 
 Produces events to the pipeline by sending requests to the FastAPI web application hosted on `http://localhost:8000`.
 
 ### d. Monitor the data pipeline.
 
-    ```
     ./monitor-pipeline.sh
-    ```
 
 Displays the Grafana dashboard link (`http://localhost:3000`) for monitoring the pipeline logs.
 
@@ -69,7 +61,6 @@ You can see the dashboard something like this:
 Gives the status of all pipeline containers by executing a Python script (`docker_status_app/app.py`).
 This application is running on: http://127.0.0.1:8111
 
-status will  look like:
 ![Image Alt Text](https://github.com/poojaparab/log-streaming-pipeline/blob/main/images/docker-status.png)
 
 
