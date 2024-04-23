@@ -30,7 +30,7 @@ Before using the log streaming pipeline, ensure you have the following installed
 
 ### a. Start the data pipeline.
 
-    ```bash
+    ```
     ./start-pipeline.sh
     ```
 
@@ -38,7 +38,7 @@ Starts the log streaming pipeline by executing `docker-compose up -d`.
 
 ### b. Stop the data pipeline.
 
-    ```bash
+    ```
     ./stop-pipeline.sh
     ```
 
@@ -46,7 +46,7 @@ Stops the log streaming pipeline by executing `docker-compose down`.
 
 ### c. Produce the events to the data pipeline.
 
-    ```bash
+    ```
     ./produce-events.sh
     ```
 
