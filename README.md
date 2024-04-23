@@ -63,6 +63,11 @@ This application is running on: http://127.0.0.1:8111
 
 ![Image Alt Text](https://github.com/poojaparab/log-streaming-pipeline/blob/main/images/docker-status.png)
 
+## Final Product: OpenSearch Dashboard
+
+Once the log streaming pipeline is up and running, you can visualize the logs using the OpenSearch dashboard. The dashboard provides comprehensive visualization and analysis capabilities for your log data.
+
+![OpenSearch Dashboard](https://github.com/poojaparab/log-streaming-pipeline/blob/main/images/On_demand_report_2024-04-23T00_17_44.501Z_e7f85d60-0106-11ef-8d00-9dbb035a2112.png)
 
 ## Contributors
 
