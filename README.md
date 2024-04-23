@@ -7,11 +7,14 @@ This repository contains a Docker Compose file and helper scripts to set up and 
 Before using the log streaming pipeline, ensure you have the following installed:
 
 - Docker
+- Docker Compose
 - Flask
 - Python
 
 ## Architecture
 ![Image Alt Text](https://github.com/poojaparab/log-streaming-pipeline/blob/main/images/Architecture_diagram.png)
+
+For Detailed technical documentation: [Click here](https://github.com/poojaparab/log-streaming-pipeline/blob/main/Technical%20document.pdf)
 
 ## Getting Started
 
@@ -23,49 +26,55 @@ Before using the log streaming pipeline, ensure you have the following installed
     ```
 
 2. **Initial configurations:**
-   - Run ./bash-script-config.sh to make all the helper scripts executable. 
+   - Run 'chmod +x helper/*.sh' to make all the helper scripts executable. 
 
 
 ## Helper Scripts Explained
 
 ### a. Start the data pipeline.
 
-    ./start-pipeline.sh
-
 Starts the log streaming pipeline by executing `docker-compose up -d`.
+
+    ./helper/start-pipeline.sh
 
 ### b. Stop the data pipeline.
 
-    ./stop-pipeline.sh
-
 Stops the log streaming pipeline by executing `docker-compose down`.
+
+    ./helper/stop-pipeline.sh
 
 ### c. Produce the events to the data pipeline.
 
-    ./produce-events.sh
+Produces events to the pipeline by sending requests to the FastAPI web application hosted on 8000 port.
 
-Produces events to the pipeline by sending requests to the FastAPI web application hosted on `http://localhost:8000`.
+    ./helper/produce-events.sh
 
 ### d. Monitor the data pipeline.
 
-    ./monitor-pipeline.sh
-
 Displays the Grafana dashboard link (`http://localhost:3000`) for monitoring the pipeline logs.
+Username: admin
+Password: admin
 
-You can see the dashboard something like this:
+    ./helper/monitor-pipeline.sh
+
+I have created the dashboard something like this:
 
 ![Image Alt Text](https://github.com/poojaparab/log-streaming-pipeline/blob/main/images/grafana.jpg)
 
 ### e. Give the status of all of the components of the data pipeline.
 
 Gives the status of all pipeline containers by executing a Python script (`docker_status_app/app.py`).
-This application is running on: http://127.0.0.1:8111
+This application is running on: http://localhost:8111
 
 ![Image Alt Text](https://github.com/poojaparab/log-streaming-pipeline/blob/main/images/docker-status.png)
 
 ## Final Product: OpenSearch Dashboard
 
 Once the log streaming pipeline is up and running, you can visualize the logs using the OpenSearch dashboard. The dashboard provides comprehensive visualization and analysis capabilities for your log data.
+
+Opensearch dashboard hosted on: http://localhost:5601/
+Username:admin
+Password:admin
 
 ![OpenSearch Dashboard](https://github.com/poojaparab/log-streaming-pipeline/blob/main/images/On_demand_report_2024-04-23T00_17_44.501Z_e7f85d60-0106-11ef-8d00-9dbb035a2112.png)
 

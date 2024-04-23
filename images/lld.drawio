@@ -1,0 +1,55 @@
+<mxfile host="app.diagrams.net" modified="2024-04-23T16:43:08.748Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="xNP8ld9k8DGkLyfbSFhv" version="24.2.8" type="device">
+  <diagram name="Page-1" id="x3MVRbZUFKv3_ztADclW">
+    <mxGraphModel dx="794" dy="420" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="X_i3Bkn0n6tX7ax091BY-1" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="170" width="770" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="X_i3Bkn0n6tX7ax091BY-36" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="X_i3Bkn0n6tX7ax091BY-3" target="X_i3Bkn0n6tX7ax091BY-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="X_i3Bkn0n6tX7ax091BY-3" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="80" y="210" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="X_i3Bkn0n6tX7ax091BY-4" value="Log streaming&lt;div&gt;FastAPI&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="90" y="225" width="60" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="X_i3Bkn0n6tX7ax091BY-12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="X_i3Bkn0n6tX7ax091BY-6" target="X_i3Bkn0n6tX7ax091BY-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="X_i3Bkn0n6tX7ax091BY-6" value="Log Collector" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="250" y="210" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="X_i3Bkn0n6tX7ax091BY-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="X_i3Bkn0n6tX7ax091BY-7" target="X_i3Bkn0n6tX7ax091BY-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="X_i3Bkn0n6tX7ax091BY-7" value="Distributed message broker" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="410" y="210" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="X_i3Bkn0n6tX7ax091BY-19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="X_i3Bkn0n6tX7ax091BY-8" target="X_i3Bkn0n6tX7ax091BY-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="X_i3Bkn0n6tX7ax091BY-8" value="Data Parsing &amp;amp; Transformation" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="570" y="210" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="X_i3Bkn0n6tX7ax091BY-10" value="GET&amp;nbsp;/produce&lt;div&gt;EventsTo&lt;/div&gt;&lt;div&gt;Pipeline&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="180" y="185" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="X_i3Bkn0n6tX7ax091BY-13" value="Forwards the log to Kafka" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="340" y="210" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="X_i3Bkn0n6tX7ax091BY-17" value="Distribute logs to logstash" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="500" y="210" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="X_i3Bkn0n6tX7ax091BY-18" value="Index Engine and&amp;nbsp;&lt;div&gt;Analytics tool&lt;/div&gt;" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="730" y="210" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="X_i3Bkn0n6tX7ax091BY-20" value="Index the logs in opensearch" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="660" y="210" width="60" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
